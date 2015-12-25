@@ -9,6 +9,7 @@
     "clean": "rimraf build",
     "postinstall": "webpack --display-error-details --config webpack/prod.config.js",
     "lint": "eslint -c .eslintrc src",
+    "package": "npm rebuild && npm version patch && npm publish --tag latest",
     "test": "karma start"
   },
   "author": "Randy Lebeau <randylebeau@gmail.com> (https://github.com/supremetechnpriest)",
