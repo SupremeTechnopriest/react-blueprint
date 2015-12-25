@@ -53,7 +53,7 @@ module.exports = {
 		}),
 
 		new webpack.ProvidePlugin({
-			Config: Config: path.resolve(__dirname, '../config/prod-config.js')
+			Config: path.resolve(__dirname, '../config/prod-config.js')
 		}),
 
 		new CopyPlugin([{
