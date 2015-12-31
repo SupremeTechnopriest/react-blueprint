@@ -7,25 +7,45 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 import { Provider } from 'react-redux';
+import { syncReduxAndRouter } from 'redux-simple-router';
+import {
+	Router,
+	Route,
+	browserHistory as history
+} from 'react-router';
 
 import { App } from 'containers';
 import { DevTools } from 'components';
-import store from 'stores/store';
 
+import { getHydratedState } from 'utils/localStorage';
+import Store from 'stores/Store';
+import rootReducer from 'reducers';
+
+
+const store = Store(rootReducer, getHydratedState());
 const dest = document.getElementById('app-container');
-const component = <App />;
+
+
+const routes = (
+
+	<Route path="/" component={App}>
+		<Route path="/link" component={App} />
+	</Route>
+);
 
 // Enable Debugger
 if (__DEVELOPMENT__) {
   window.React = React;
 }
 
+syncReduxAndRouter(history, store, state => state.route);
+
 if (__DEVTOOLS__ && !window.devToolsExtension) {
 	// Dev Render
 	ReactDOM.render(
 		<Provider store={store}>
 			<div>
-				{component}
+				<Router history={history}>{routes}</Router>
 				<DevTools />
 			</div>
 		</Provider>,
@@ -34,7 +54,9 @@ if (__DEVTOOLS__ && !window.devToolsExtension) {
 } else {
 	// Production Render
 	ReactDOM.render(
-		<Provider store={store}>{component}</Provider>,
+		<Provider store={store}>
+			<Router history={history}>{routes}</Router>
+		</Provider>,
 		dest
 	);
 }

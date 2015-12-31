@@ -26,6 +26,7 @@ Running the latest:
 - babel
 - eslint
 - core-decorators
+- react-router
 
 ## Config
 

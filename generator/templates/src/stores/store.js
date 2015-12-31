@@ -4,10 +4,9 @@
 
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
+import { DevTools } from 'components';
 import createLogger from 'redux-logger';
 import rootReducer from 'reducers';
-import { DevTools } from 'components';
-import { getHydratedState } from 'utils/localStorage';
 
 // Production Store
 const createStoreWithMiddleware = () => {
@@ -18,7 +17,10 @@ const createStoreWithMiddleware = () => {
 const composeStore = () => {
 	return (
 		compose(
-			applyMiddleware(thunk, createLogger({ collapsed: true })),
+			applyMiddleware(
+				thunk,
+				createLogger({ collapsed: true })
+			),
 			window.devToolsExtension ? window.devToolsExtension() : DevTools.instrument()
 		)(createStore)
 	);
@@ -31,8 +33,6 @@ if(__DEVELOPMENT__ && __DEVTOOLS__) {
 } else {
 	store = createStoreWithMiddleware();
 }
-
-store = store(rootReducer, getHydratedState());
 
 if (__DEVELOPMENT__ && module.hot) {
 	module.hot.accept(rootReducer, () => {

@@ -6,14 +6,19 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import radium from 'radium';
 
-import { authenticated$ } from 'selectors/UISelector';
+import { authenticated$ } from 'selectors/UISelectors';
+import { path$ } from 'selectors/RouteSelectors';
+
+import { pushPath } from 'redux-simple-router';
 import { updateAuthenticated } from 'actions/UIActions';
+
 import { colors } from 'utils/style';
 import { app } from 'utils/copy';
 import RedBox from 'redbox-react';
 
 @radium
 @connect(authenticated$)
+@connect(path$)
 export default class App extends Component {
 
 	displayName = 'App';
@@ -34,6 +39,8 @@ export default class App extends Component {
 				<p>Hello {this.props.authenticated ? 'Authorized' : 'Unauthorized'}</p>
 				<p>Press "H" to hide redux devtools</p>
 				<p>Press "Q" to change devtools position</p>
+				<h6>current path: {this.props.path}</h6>
+				<a onClick={this.props.dispatch.bind(this, pushPath('/link'))}>A link</a>
 			</div>
 		);
 	}
