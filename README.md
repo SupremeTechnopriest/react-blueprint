@@ -2,9 +2,10 @@
 
 A react web app generator inspired by react-native.
 
-::rocket:: Node v5 ready.
+:rocket: Node v5 ready.
 
 Running the latest:
+
 - react v0.14.3
 - babel v6.3.23
 - redux v3.0.5
@@ -24,8 +25,6 @@ Running the latest:
 - babel
 - eslint
 - core-decorators
-- react-router-component
-- react-router
 
 ## Config
 
@@ -51,6 +50,7 @@ Running the latest:
 
 ## TODO
 
+- Add react-router / react-router-component
 - Add more example code
 - Comment all example code
 - Write a better readme
