@@ -1,15 +1,58 @@
 # React Blueprint
 
-A react boilerplate using the latest react(14), babel(6) and redux(3).  Node v5 ready.
+A react web app generator inspired by react-native.
+
+::rocket:: Node v5 ready.
+
+Running the latest:
+- react v0.14.3
+- babel v6.3.23
+- redux v3.0.5
 
 ## Installation
-
 `npm i react-blueprint -g`
 
 ## Usage
 `react-blueprint init [name]`
 
+## Included Modules
+- react.js
+- redux
+- superagent
+- sockjs
+- webpack
+- babel
+- eslint
+- core-decorators
+- react-router-component
+- react-router
+
+## Config
+
+## Source
+
+### React
+##### Components
+##### Containers
+
+### Redux
+##### Store
+##### Reducers
+##### Selectors
+##### Actions
+
+### Utils
+##### Copy
+##### Style
+##### Decorators
+##### LocalStorage
+##### Api
+##### Websocket
+
 ## TODO
 
-- Finish setting up codemod automations.  Blocked pending an [issue](https://github.com/facebook/jscodeshift/issues/73) with `jscodeshift`
+- Add more example code
+- Comment all example code
+- Write a better readme
+- Create github.io page
 - Implement Karma test suite
