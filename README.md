@@ -18,6 +18,7 @@ Running the latest:
 
 ## Included Modules
 - react.js
+- radium
 - redux
 - superagent
 - sockjs
