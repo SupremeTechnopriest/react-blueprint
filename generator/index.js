@@ -21,7 +21,7 @@ module.exports = yeoman.extend({
 		);
 
 		this.fs.copyTpl(
-			this.templatePath('*/**/**/**'),
+			this.templatePath('**/**/**/**'),
 			this.destinationPath(''),
 			{ name: name }
 		);

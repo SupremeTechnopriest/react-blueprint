@@ -1,7 +1,7 @@
 
 export const app = {
-	title: 'react-blueprint',
-	subtitle: 'A React.js and Redux Boilerplate'
+	title: '<%= name %>',
+	subtitle: 'A React Blueprint App'
 };
 
 export default {

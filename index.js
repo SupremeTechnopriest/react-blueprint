@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 var exec = require('child_process').exec,
 	program = require('commander'),
 	fs = require('fs'),
@@ -5,7 +7,7 @@ var exec = require('child_process').exec,
 	path = require('path'),
 	chalk = require('chalk'),
 	semver = require('semver'),
-	cli = require('./cli/cli');
+	cli = require('./cli');
 
 var REACT_BLUEPRINT_PACKAGE_JSON_PATH = function() {
 	return path.resolve(
@@ -30,7 +32,7 @@ function checkNodeVersion() {
 }
 
 function validatePackageName(name) {
-	if (!name.match(/^[$A-Z_][0-9A-Z_$]*$/i)) {
+	if (!name.match(/^[a-zA-Z0-9-_]+$/i)) {
 		console.error(
 			'"%s" is not a valid name for a project. Please use a valid identifier ' +
 			'name (alphanumeric).',
@@ -53,10 +55,7 @@ function validatePackageName(name) {
 
 	checkNodeVersion();
 
-	var packageJson = require(REACT_BLUEPRINT_PACKAGE_JSON_PATH());
-
 	program
-		.version(packageJson.version)
 		.option('-v, --version', 'display current version');
 
 	program

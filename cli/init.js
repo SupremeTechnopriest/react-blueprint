@@ -13,9 +13,9 @@ function CreateSuppressingTerminalAdapter() {
 
 }
 
-function init(root, name) {
+module.exports = function(root, name) {
 
-	console.log(chalk.blue('Setting up new React Blueprint app in ' + root));
+	console.log(chalk.yellow('Setting up new React Blueprint app ' + chalk.cyan(name) + ' in ' + chalk.cyan(root)));
 
 	var env = yeoman.createEnv(
 		undefined,
@@ -35,6 +35,9 @@ function init(root, name) {
 	generator.destinationRoot(root);
 	generator.run(function(err) {
 		if (!err) {
+
+			console.log(chalk.yellow('Installing dependencies...'));
+
 			var proc = spawn('npm', [ 'install' ], {
 				cwd: root,
 				stdio: 'inherit'
@@ -44,13 +47,10 @@ function init(root, name) {
 					console.error('`npm install` failed');
 					return;
 				}
+				console.log(chalk.green('React Blueprint app ') + chalk.cyan(name) + chalk.green(' created in ') + chalk.cyan(root));
 			});
 		}
 
 	});
 
-}
-
-module.exports = {
-	init: init
 }

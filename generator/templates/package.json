@@ -1,11 +1,8 @@
 {
-  "name": "react-blueprint",
-  "version": "1.0.1",
-  "description": "React.js Redux Boilerplate",
+  "name": "<%= name %>",
+  "version": "0.0.1",
+  "description": "A React Blueprint App",
   "main": "index.js",
-  "bin": {
-    "react-blueprint": "bin/index.js"
-  },
   "scripts": {
     "start": "node webpack/webpack-dev-server.js",
     "build": "webpack --verbose --colors --display-error-details --config webpack/prod.config.js",

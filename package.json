@@ -3,14 +3,14 @@
   "version": "1.0.1",
   "description": "React.js Redux Boilerplate",
   "main": "index.js",
-  "preferGlobal": true,
   "bin": {
-    "react-blueprint": "bin/index.js"
+    "react-blueprint": "index.js"
   },
   "scripts": {
     "package": "npm rebuild && npm version patch && npm publish --tag latest",
     "test": "karma start"
   },
+  "preferGlobal": true,
   "engines": {
     "node": ">4.2.0"
   },
