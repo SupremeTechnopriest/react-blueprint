@@ -1,0 +1,31 @@
+{
+  "name": "react-blueprint-cli",
+  "version": "1.0.3",
+  "description": "React.js Redux Boilerplate",
+  "main": "index.js",
+  "bin": {
+    "react-blueprint": "index.js"
+  },
+  "scripts": {
+    "package": "npm rebuild && npm version patch && npm publish --tag latest",
+    "test": "karma start"
+  },
+  "preferGlobal": true,
+  "engines": {
+    "node": ">4.2.0"
+  },
+  "author": "Randy Lebeau <randylebeau@gmail.com> (https://github.com/supremetechnpriest)",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/supremetechnopriest/react-blueprint.git"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "chalk": "^1.1.1",
+    "commander": "^2.9.0",
+    "prompt": "^0.2.14",
+    "semver": "^5.1.0",
+    "yeoman-environment": "^1.4.0",
+    "yeoman-generator": "^0.22.2"
+  }
+}
