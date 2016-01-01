@@ -1,2 +1,2 @@
-import View from './View/View';
-import ScrollView from './ScrollView/ScrollView';
+export View from './View/View';
+export ScrollView from './ScrollView/ScrollView';
