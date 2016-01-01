@@ -30,7 +30,7 @@ module.exports = {
 	module: {
 		loaders: [{
 			test: /\.js$/,
-			exclude: [path.resolve(__dirname, "../node_modules")],
+			include: [path.resolve(__dirname, "../src")],
 			loaders: ['babel-loader', 'eslint-loader']
 		}, {
 			test: /\.json$/,
@@ -61,8 +61,10 @@ module.exports = {
 			'src',
 			'node_modules'
 		],
+		fallback: path.join(__dirname, "..", "node_modules"),
 		extensions: ['', '.json', '.js']
 	},
+	resolveLoader: { fallback: path.join(__dirname, "..", "node_modules") },
 	plugins: [
 		// hot reload
 		new webpack.HotModuleReplacementPlugin(),
