@@ -1,2 +1,4 @@
 src
 cli
+*.sublime-project
+*.sublime-workspace
