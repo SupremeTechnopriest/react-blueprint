@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import Infinite from 'react-infinite';
 import radium from 'radium';
 
 @radium
@@ -11,13 +12,9 @@ export default class ScrollView extends Component {
 	state = {};
 
 	render() {
-		return (
-			<div><h1>ScrollView</h1></div>
-		)
+		return <Infinite {...this.props}>{this.props.children}</Infinite>;
 	}
 
 }
 
-const styles = {
-
-};
+const styles = {};
