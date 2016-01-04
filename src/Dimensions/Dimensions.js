@@ -1,4 +1,21 @@
-const Dimensions = (element) => {
+import React, { Component } from 'react';
+
+function defaultGetWidth (element) {
+  return element.clientWidth || 1
+}
+
+function defaultGetHeight (element) {
+  return element.clientHeight || 0
+}
+
+const styles = {
+	width: '100%',
+	height: '100%',
+	padding: 0,
+	border: 0
+};
+
+const getDimensions = (element) => {
 
 	// Reject no element
     if(!element) {
@@ -35,8 +52,64 @@ const Dimensions = (element) => {
 
 };
 
-const isWindow = (variable) => {
-	return variable && variable.document && variable.location && variable.alert && variable.setInterval;
+const bindDimensions = (ComposedComponent, { getHeight = defaultGetHeight, getWidth = defaultGetWidth } = {}) => {
+
+	return class extends Component {
+
+		state = {};
+
+		updateDimensions = () => {
+			const container = this.refs.container;
+			if (!container) {
+				throw new Error('Cannot find container div')
+			}
+			this.setState({
+				width: getWidth(container),
+				height: getHeight(container)
+			});
+		}
+
+		onResize() {
+			if (this.rqf) return
+			this.rqf = window.requestAnimationFrame(() => {
+				this.rqf = null;
+				this.updateDimensions();
+			});
+		}
+
+		componentDidMount () {
+			window.addEventListener('resize', this.onResize.bind(this), false);
+			this.updateDimensions();
+		}
+
+		componentWillUnmount () {
+			window.removeEventListener('resize', this.onResize.bind(this));
+		}
+
+		render () {
+			return (
+				<div style={styles} ref='container'>
+					<ComposedComponent ref="composedComponent" {...this.state} {...this.props}/>
+				</div>
+			)
+		}
+	}
+}
+
+const isWindow = (element) => {
+	return element && element.document && element.location && element.alert && element.setInterval;
 } 
+
+const Dimensions = (element, options = {}) => {
+
+	switch(typeof element) {
+		case 'object':
+			return getDimensions(element);
+		case 'function':
+			return bindDimensions(element);
+		default:
+			return;
+	}
+}
 
 export default Dimensions;
