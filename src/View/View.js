@@ -9,9 +9,9 @@ export default class View extends Component {
 		column: PropTypes.bool,
 		auto: PropTypes.bool,
 		className: PropTypes.string,
-		height: PropTypes.string,
+		height: PropTypes.oneOfType([ PropTypes.number, PropTypes.string ]),
 		style: PropTypes.object,
-		width: PropTypes.oneOfType([PropTypes.number, PropTypes.string])
+		width: PropTypes.oneOfType([ PropTypes.number, PropTypes.string ])
 	}
 
 	static defaultProps = {

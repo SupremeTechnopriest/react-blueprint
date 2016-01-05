@@ -58,7 +58,7 @@ const bindDimensions = (ComposedComponent, { getHeight = defaultGetHeight, getWi
 
 		state = {};
 
-		updateDimensions = () => {
+		updateDimensions() {
 			const container = this.refs.container;
 			if (!container) {
 				throw new Error('Cannot find container div')
@@ -73,26 +73,33 @@ const bindDimensions = (ComposedComponent, { getHeight = defaultGetHeight, getWi
 			if (this.rqf) return
 			this.rqf = window.requestAnimationFrame(() => {
 				this.rqf = null;
-				this.updateDimensions();
+				this.updateDimensions.apply(this);
 			});
 		}
 
-		componentDidMount () {
+		componentDidMount() {
 			window.addEventListener('resize', this.onResize.bind(this), false);
-			this.updateDimensions();
+			setTimeout(() => {
+				this.updateDimensions.apply(this);
+			}, 1);
 		}
 
-		componentWillUnmount () {
+		componentWillUnmount() {
 			window.removeEventListener('resize', this.onResize.bind(this));
 		}
 
-		render () {
+		render() {
 			return (
 				<div style={styles} ref='container'>
-					<ComposedComponent ref="composedComponent" {...this.state} {...this.props}/>
+					<ComposedComponent getDimensions={this.getDimensions.bind(this)} {...this.state} {...this.props}/>
 				</div>
 			)
 		}
+
+		getDimensions() {
+			return this.state;
+		}
+
 	}
 }
 
