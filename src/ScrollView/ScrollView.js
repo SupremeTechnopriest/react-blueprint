@@ -18,9 +18,9 @@ import _isFinite from 'lodash.isfinite';
 export default class ScrollView extends Component {
 
 	static propTypes = {
-		children: React.PropTypes.any,
+		children: PropTypes.any,
 
-		handleScroll: React.PropTypes.func,
+		handleScroll: PropTypes.func,
 
 		// preloadBatchSize causes updates only to
 		// happen each preloadBatchSize pixels of scrolling.
@@ -37,24 +37,28 @@ export default class ScrollView extends Component {
 		// The provided elementHeight can be either
 		//  1. a constant: all elements are the same height
 		//  2. an array containing the height of each element
-		elementHeight: React.PropTypes.oneOfType([
-			React.PropTypes.number,
-			React.PropTypes.arrayOf(React.PropTypes.number)
+		elementHeight: PropTypes.oneOfType([
+			PropTypes.number,
+			PropTypes.arrayOf(PropTypes.number)
 		]).isRequired,
 		// This is the total height of the visible window.
-		containerHeight: React.PropTypes.number,
-		useWindowAsScrollContainer: React.PropTypes.bool,
+		containerHeight: PropTypes.number,
+		useWindowAsScrollContainer: PropTypes.bool,
 
-		displayBottomUpwards: React.PropTypes.bool.isRequired,
+		displayBottomUpwards: PropTypes.bool.isRequired,
 
-		infiniteLoadBeginEdgeOffset: React.PropTypes.number,
-		onInfiniteLoad: React.PropTypes.func,
-		loadingSpinnerDelegate: React.PropTypes.node,
+		infiniteLoadBeginEdgeOffset: PropTypes.number,
+		onInfiniteLoad: PropTypes.func,
+		loadingSpinnerDelegate: PropTypes.node,
 
-		isInfiniteLoading: React.PropTypes.bool,
-		timeScrollStateLastsForAfterUserScrolls: React.PropTypes.number,
+		isInfiniteLoading: PropTypes.bool,
+		timeScrollStateLastsForAfterUserScrolls: PropTypes.number,
 
-		className: React.PropTypes.string
+		// Delays the optimizations.  Useful if you need to calculate children height
+		// Timeout in milliseconds, 0 for no delay
+		delayOptimizations: PropTypes.number,
+
+		className: PropTypes.string
 	};
 
 	static defaultProps = {
@@ -104,7 +108,7 @@ export default class ScrollView extends Component {
 		let state = nextInternalState.newState;
 		state.scrollTimeout = undefined;
 		state.isScrolling = false;
-		state.loaded = false;
+		state.loaded = this.props.delayOptimizations ? false : true;
 
 		this.state = state;
 
@@ -304,7 +308,7 @@ export default class ScrollView extends Component {
 			}
 		}
 
-		if(!this.state.loaded) setTimeout(() => { this.setState({ loaded: true }) }, 100);
+		if(!this.state.loaded) setTimeout(() => { this.setState({ loaded: true }) }, this.props.delayOptimizations);
 	}
 
 	componentWillUnmount() {
