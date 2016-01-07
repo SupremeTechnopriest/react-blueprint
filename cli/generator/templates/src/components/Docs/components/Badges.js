@@ -12,8 +12,8 @@ export default class Badges extends Component {
 					</a>
 				</div>
 				<div style={styles.badge}>
-					<a href="https://www.npmjs.org/package/react-blueprint">
-						<img src="https://img.shields.io/node/v/react-blueprint.svg" alt="node" />
+					<a href='https://www.versioneye.com/user/projects/568ea160691e2d002b000055'>
+						<img src='https://www.versioneye.com/user/projects/568ea160691e2d002b000055/badge.svg?style=flat' alt="Dependency Status" />
 					</a>
 				</div>
 				<div style={styles.badge}>

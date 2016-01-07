@@ -3,7 +3,7 @@
 [![Travis](https://img.shields.io/travis/SupremeTechnopriest/react-blueprint.svg)](https://travis-ci.org/SupremeTechnopriest/react-blueprint)
 [![node](https://img.shields.io/node/v/react-blueprint.svg)](https://www.npmjs.org/package/react-blueprint)
 [![npm](https://img.shields.io/npm/v/react-blueprint.svg)](https://www.npmjs.org/package/react-blueprint)
-[![VersionEye](https://img.shields.io/versioneye/d/supremetechnopriest/react-blueprint.svg)](https://www.npmjs.org/package/react-blueprint)
+[![Dependency Status](https://www.versioneye.com/user/projects/568ea160691e2d002b000055/badge.svg?style=flat)](https://www.versioneye.com/user/projects/568ea160691e2d002b000055)
 [![npm](https://img.shields.io/npm/dm/react-blueprint.svg)](https://www.npmjs.org/package/react-blueprint)
 [![npm](https://img.shields.io/npm/dt/react-blueprint.svg)](https://www.npmjs.org/package/react-blueprint)
 [![npm](https://img.shields.io/npm/l/react-blueprint.svg)](https://www.npmjs.org/package/react-blueprint)
