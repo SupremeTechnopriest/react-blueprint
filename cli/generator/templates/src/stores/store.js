@@ -6,19 +6,26 @@ import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 import { DevTools } from 'components';
 import createLogger from 'redux-logger';
+
+import { syncHistory } from 'redux-simple-router';
+import { browserHistory as history } from 'react-router';
+
 import rootReducer from 'reducers';
 
+let middleware = syncHistory(history);
+
 // Production Store
-const createStoreWithMiddleware = () => {
-	return applyMiddleware(thunk)(createStore);
+const createProductionStore = () => {
+	return applyMiddleware(thunk, middleware)(createStore);
 }
 
 // Dev Store
-const composeStore = () => {
+const createDevelopmentStore = () => {
 	return (
 		compose(
 			applyMiddleware(
 				thunk,
+				middleware,
 				createLogger({ collapsed: true })
 			),
 			window.devToolsExtension ? window.devToolsExtension() : DevTools.instrument()
@@ -29,9 +36,9 @@ const composeStore = () => {
 let store;
 
 if(__DEVELOPMENT__ && __DEVTOOLS__) {
-	store = composeStore();
+	store = createDevelopmentStore();
 } else {
-	store = createStoreWithMiddleware();
+	store = createProductionStore();
 }
 
 if (__DEVELOPMENT__ && module.hot) {
@@ -40,4 +47,4 @@ if (__DEVELOPMENT__ && module.hot) {
 	});
 }
 
-export default store;
+export default { middleware, store }
