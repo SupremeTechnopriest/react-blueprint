@@ -14,15 +14,40 @@ module.exports = yeoman.extend({
 
 		let name = this.args[0];
 
-		this.fs.copyTpl(
+		this.fs.copy(
 			this.templatePath('.*'),
+			this.destinationPath('')
+		);
+
+		this.fs.copy(
+			this.templatePath('LICENSE'),
+			this.destinationPath('LICENSE')
+		);
+
+		this.fs.copy(
+			this.templatePath('config'),
+			this.destinationPath('config')
+		);
+
+		this.fs.copy(
+			this.templatePath('static'),
+			this.destinationPath('static')
+		);
+
+		this.fs.copy(
+			this.templatePath('webpack'),
+			this.destinationPath('webpack')
+		);
+
+		this.fs.copyTpl(
+			this.templatePath('*.*'),
 			this.destinationPath(''),
 			{ name: name }
 		);
 
 		this.fs.copyTpl(
-			this.templatePath('**/**/**/**'),
-			this.destinationPath(''),
+			this.templatePath('src'),
+			this.destinationPath('src'),
 			{ name: name }
 		);
 

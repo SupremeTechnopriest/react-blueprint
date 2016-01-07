@@ -17,6 +17,8 @@ app.use(webpackHotMiddleware(compiler, {
     log: console.log, path: '/__webpack_hmr', heartbeat: 10 * 1000
 }));
 
+app.use(express.static(path.join(__dirname ,'../static')));
+
 app.get('*', function(req, res) {
     res.sendFile(path.join(__dirname, '../static/index.html'));
 });

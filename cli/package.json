@@ -1,6 +1,6 @@
 {
   "name": "react-blueprint-cli",
-  "version": "1.0.3",
+  "version": "1.1.0",
   "description": "React.js Redux Boilerplate",
   "main": "index.js",
   "bin": {
@@ -12,7 +12,7 @@
   },
   "preferGlobal": true,
   "engines": {
-    "node": ">4.2.0"
+    "node": ">=4.2.0"
   },
   "author": "Randy Lebeau <randylebeau@gmail.com> (https://github.com/supremetechnpriest)",
   "repository": {

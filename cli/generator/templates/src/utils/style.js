@@ -1,3 +1,14 @@
+export const type = {
+	regular: 'clear_sans',
+	bold: 'clear_sans_bold',
+	boldItalic: 'clear_sans_bold_italic',
+	italic: 'clear_sans_italic',
+	light: 'clear_sans_light',
+	medium: 'clear_sans_medium',
+	mediumItalic: 'clear_sans_medium_italic',
+	thin: 'clear_sans_thin'
+};
+
 export const colors = {
 	red50: '#ffebee',
 	red100: '#ffcdd2',
@@ -286,5 +297,6 @@ export const colors = {
 }
 
 export default {
-	colors
+	colors,
+	type
 }

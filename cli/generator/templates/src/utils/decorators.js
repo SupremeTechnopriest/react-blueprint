@@ -1,5 +1,5 @@
 
-export const exampleDecorator = (target, key, descriptor, [options = {}]) => {
+export const exampleDecorator = (target, key, descriptor, options = {}) => {
 	target.options = options;
 	return target;
 }

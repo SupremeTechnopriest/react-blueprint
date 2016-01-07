@@ -68,6 +68,7 @@ module.exports = {
 	plugins: [
 		// hot reload
 		new webpack.HotModuleReplacementPlugin(),
+		new webpack.NoErrorsPlugin(),
 		new webpack.IgnorePlugin(/webpack-stats\.json$/),
 		new webpack.ProvidePlugin({
 			Config: path.resolve(__dirname, '../config/dev-config.js')
