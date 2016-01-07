@@ -13,7 +13,7 @@ import infiniteHelpers from './utils/infiniteHelpers';
 import { preloadType } from './utils/types';
 import checkProps from './utils/checkProps';
 
-import _isFinite from 'lodash.isfinite';
+import _ from 'lodash';
 
 export default class ScrollView extends Component {
 
@@ -80,7 +80,7 @@ export default class ScrollView extends Component {
 	};
 
 	static containerHeightScaleFactor(factor) {
-		if (!_isFinite(factor)) {
+		if (!_.isFinite(factor)) {
 			throw new Error('The scale factor must be a number.');
 		}
 		return {
@@ -299,7 +299,7 @@ export default class ScrollView extends Component {
 
 	componentDidMount() {
 		this.utils.subscribeToScrollListener();
-		if (_isFinite(this.computedProps.infiniteLoadBeginEdgeOffset) &&
+		if (_.isFinite(this.computedProps.infiniteLoadBeginEdgeOffset) &&
 			this.state.infiniteComputer.getTotalScrollableHeight() < this.computedProps.containerHeight) {
 			this.setState({
 				isInfiniteLoading: true

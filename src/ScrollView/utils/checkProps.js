@@ -3,10 +3,7 @@
 // make the minimum amount of sense.
 
 import React from 'react';
-import _isFinite from 'lodash.isfinite';
-
-// var React = global.React || require('react');
-// var _isFinite = require('lodash.isfinite');
+import _ from 'lodash';
 
 const checkProps = (props) => {
     
@@ -16,7 +13,7 @@ const checkProps = (props) => {
         throw new Error(invariant + 'Either containerHeight or useWindowAsScrollContainer must be provided.');
     }
 
-    if (props.optimizeRendering && !(_isFinite(props.elementHeight) || Array.isArray(props.elementHeight))) {
+    if (props.optimizeRendering && !(_.isFinite(props.elementHeight) || Array.isArray(props.elementHeight))) {
         throw new Error(invariant + 'You must provide either a number or an array of numbers as the elementHeight.');
     }
 
