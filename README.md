@@ -105,7 +105,7 @@ if (__DEVTOOLS__ && !window.devToolsExtension) {
 
 ```
 
-At this point you can safely remove the Docs directory from `src/components` and your app will be rendering the blank AppContainer located at `src/containers/AppContainer`.
+At this point you can safely remove the Docs directory from `src/components` and your app will be rendering the blank AppContainer located at `src/containers/App/App.js`.
 
 
 ## Examples
