@@ -12,11 +12,11 @@ export default class View extends Component {
 		height: PropTypes.oneOfType([ PropTypes.number, PropTypes.string ]),
 		style: PropTypes.object,
 		width: PropTypes.oneOfType([ PropTypes.number, PropTypes.string ])
-	}
+	};
 
 	static defaultProps = {
 		width: 1
-	}
+	};
 
 	render() {
 
