@@ -16,7 +16,7 @@ const checkProps = (props) => {
         throw new Error(invariant + 'Either containerHeight or useWindowAsScrollContainer must be provided.');
     }
 
-    if (!(_isFinite(props.elementHeight) || Array.isArray(props.elementHeight))) {
+    if (props.optimizeRendering && !(_isFinite(props.elementHeight) || Array.isArray(props.elementHeight))) {
         throw new Error(invariant + 'You must provide either a number or an array of numbers as the elementHeight.');
     }
 

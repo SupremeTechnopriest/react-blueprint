@@ -44,8 +44,8 @@ const getDimensions = (element) => {
 	        width: element.offsetWidth
 	    };
 	    let style = window.getComputedStyle(element);
-	    dimensions.height += parseInt(style.marginTop) + parseInt(style.marginBottom);
-	    dimensions.width += parseInt(style.marginLeft) + parseInt(style.marginRight);
+	    dimensions.height += parseInt(style.marginTop) + parseInt(style.marginBottom) + parseInt(style.borderBottomWidth) + parseInt(style.borderTopWidth);
+	    dimensions.width += parseInt(style.marginLeft) + parseInt(style.marginRight) + parseInt(style.borderLeftWidth) + parseInt(style.borderRightWidth);
     }
 
   	return dimensions;

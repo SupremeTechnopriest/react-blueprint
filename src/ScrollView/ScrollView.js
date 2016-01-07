@@ -40,7 +40,7 @@ export default class ScrollView extends Component {
 		elementHeight: PropTypes.oneOfType([
 			PropTypes.number,
 			PropTypes.arrayOf(PropTypes.number)
-		]).isRequired,
+		]),
 		// This is the total height of the visible window.
 		containerHeight: PropTypes.number,
 		useWindowAsScrollContainer: PropTypes.bool,
@@ -66,8 +66,10 @@ export default class ScrollView extends Component {
 
 		useWindowAsScrollContainer: false,
 
+		optimizeRendering: true,
+
 		onInfiniteLoad: () => {},
-		loadingSpinnerDelegate: < div / > ,
+		loadingSpinnerDelegate: <div /> ,
 
 		displayBottomUpwards: false,
 
@@ -108,7 +110,7 @@ export default class ScrollView extends Component {
 		let state = nextInternalState.newState;
 		state.scrollTimeout = undefined;
 		state.isScrolling = false;
-		state.loaded = this.props.delayOptimizations ? false : true;
+		state.optimize = !this.props.optimizeRendering ? false : !this.props.delayOptimizations ? false : true;
 
 		this.state = state;
 
@@ -174,10 +176,14 @@ export default class ScrollView extends Component {
 		};
 		if (props.useWindowAsScrollContainer) {
 			utilities.subscribeToScrollListener = () => {
-				window.addEventListener('scroll', this.infiniteHandleScroll);
+				if(this.state.optimize) {
+					window.addEventListener('scroll', this.infiniteHandleScroll.bind(this));
+				}
 			};
 			utilities.unsubscribeFromScrollListener = () => {
-				window.removeEventListener('scroll', this.infiniteHandleScroll);
+				if(this.state.optimize) {
+					window.removeEventListener('scroll', this.infiniteHandleScroll);
+				}
 			};
 			utilities.nodeScrollListener = () => {};
 			utilities.getScrollTop = () => window.pageYOffset;
@@ -189,7 +195,7 @@ export default class ScrollView extends Component {
 		} else {
 			utilities.subscribeToScrollListener = () => {};
 			utilities.unsubscribeFromScrollListener = () => {};
-			utilities.nodeScrollListener = this.infiniteHandleScroll;
+			utilities.nodeScrollListener = this.infiniteHandleScroll 
 			utilities.getScrollTop = () => {
 				let scrollable;
 				if (this.refs && this.refs.scrollable) {
@@ -308,7 +314,7 @@ export default class ScrollView extends Component {
 			}
 		}
 
-		if(!this.state.loaded) setTimeout(() => { this.setState({ loaded: true }) }, this.props.delayOptimizations);
+		if(!this.state.optimize && this.props.delayOptimizations) setTimeout(() => { this.setState({ optimize: true }) }, this.props.delayOptimizations);
 	}
 
 	componentWillUnmount() {
@@ -316,7 +322,8 @@ export default class ScrollView extends Component {
 	}
 
 	infiniteHandleScroll(e) {
-		if (this.utils.scrollShouldBeIgnored(e)) {
+
+		if (!this.state.optimize && this.utils.scrollShouldBeIgnored(e)) {
 			return;
 		}
 		this.computedProps.handleScroll($(this.refs.scrollable));
@@ -340,7 +347,7 @@ export default class ScrollView extends Component {
 
 		this.setState({
 			isScrolling: true,
-			scrollTimeout: scrollTimeout
+			scrollTimeout
 		});
 	}
 
@@ -393,7 +400,7 @@ export default class ScrollView extends Component {
 	render() {
 
 		var displayables;
-		if (React.Children.count(this.computedProps.children) > 1 && this.state.loaded) {
+		if (React.Children.count(this.computedProps.children) > 1 && this.state.optimize) {
 			displayables = this.computedProps.children.slice(this.state.displayIndexStart,
 				this.state.displayIndexEnd + 1);
 		} else {
@@ -405,8 +412,8 @@ export default class ScrollView extends Component {
 			infiniteScrollStyles.pointerEvents = 'none';
 		}
 
-		var topSpacerHeight = this.state.infiniteComputer.getTopSpacerHeight(this.state.displayIndexStart),
-			bottomSpacerHeight = this.state.infiniteComputer.getBottomSpacerHeight(this.state.displayIndexEnd);
+		var topSpacerHeight = this.state.optimize ? this.state.infiniteComputer.getTopSpacerHeight(this.state.displayIndexStart) : 0,
+			bottomSpacerHeight = this.state.optimize ? this.state.infiniteComputer.getBottomSpacerHeight(this.state.displayIndexEnd) : 0;
 
 		// This asymmetry is due to a reluctance to use CSS to control
 		// the bottom alignment
