@@ -18,7 +18,7 @@ import React from 'react';
 import { render } from 'react-dom';
 
 import { Provider } from 'react-redux';
-import { syncReduxAndRouter } from 'redux-simple-router';
+
 import {
 	Router,
 	browserHistory as history
@@ -27,20 +27,19 @@ import {
 import { App } from 'containers';
 import { DevTools, Routes } from 'components';
 
-import { getHydratedState } from 'utils/localStorage';
 import Store from 'stores/Store';
+import { getHydratedState } from 'utils/localStorage';
 import rootReducer from 'reducers';
 
-const store = Store(rootReducer, getHydratedState());
+const store = Store.store(rootReducer, getHydratedState());
 const dest = document.getElementById('app-container');
 
+Store.middleware.syncHistoryToStore(store, state => state.route);
 
 // Enable Debugger
 if (__DEVELOPMENT__) {
   window.React = React;
 }
-
-syncReduxAndRouter(history, store, state => state.route);
 
 if (__DEVTOOLS__ && !window.devToolsExtension) {
 	// Dev Render

@@ -33,8 +33,6 @@ if (__DEVELOPMENT__) {
   window.React = React;
 }
 
-// syncReduxAndRouter(history, store, state => state.route);
-
 if (__DEVTOOLS__ && !window.devToolsExtension) {
 	// Dev Render
 	render(
