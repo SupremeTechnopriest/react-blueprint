@@ -9,7 +9,6 @@ import {
 	browserHistory as history
 } from 'react-router';
 
-import { App } from 'containers';
 import { DevTools, Routes } from 'components';
 
 import Store from 'stores/Store';
