@@ -34,7 +34,7 @@ export default class View extends Component {
 			dynamicStyles.height = this.props.height;
 		}
 
-		if (this.props.auto) dynamicStyles.flex = '0 0 auto';
+		if (this.props.auto) dynamicStyles.flex = '1 0 0';
 
 		let style;
 		if(this.props.style) {
