@@ -11,6 +11,7 @@ import { syncHistory } from 'redux-simple-router';
 import { browserHistory as history } from 'react-router';
 
 import rootReducer from 'reducers';
+import { getHydratedState } from 'utils/localStorage';
 
 let middleware = syncHistory(history);
 
@@ -47,4 +48,7 @@ if (__DEVELOPMENT__ && module.hot) {
 	});
 }
 
-export default { middleware, store }
+store = store(rootReducer, getHydratedState());
+middleware.syncHistoryToStore(store, state => state.route);
+
+export default store;
