@@ -29,9 +29,15 @@ module.exports = yeoman.extend({
 			this.destinationPath('config')
 		);
 
+		this.fs.copyTpl(
+			this.templatePath('static/index.html'),
+			this.destinationPath('static/index.html'),
+			{ name: name } 
+		);
+
 		this.fs.copy(
-			this.templatePath('static'),
-			this.destinationPath('static')
+			this.templatePath('static/fonts'),
+			this.destinationPath('static/fonts')
 		);
 
 		this.fs.copy(

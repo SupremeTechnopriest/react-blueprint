@@ -5,12 +5,12 @@
 
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import radium, { Style } from 'radium';
+import Radium, { Style } from 'radium';
 import { View } from 'react-blueprint';
-import { colors } from 'utils/style';
-import { app } from 'utils/copy';
+import { colors, type } from 'utils/style';
+import { app as copy } from 'utils/copy';
 
-@radium
+@Radium
 @connect()
 export default class App extends Component {
 
@@ -25,7 +25,7 @@ export default class App extends Component {
 			<View>
 				<Style rules={rules} />
 				<View>
-					<h1>{app.title}</h1>
+					<h1>{copy.title}</h1>
 					{this.props.children}
 				</View>
 			</View>
@@ -39,6 +39,7 @@ const rules = {
     background: colors.grey100
   },
   body: {
-    margin: 0
+    margin: 0,
+    fontFamily: type.regular
   }
 };
