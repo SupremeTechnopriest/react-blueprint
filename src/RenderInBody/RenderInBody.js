@@ -9,7 +9,7 @@ export const RenderInBody = (ComposedComponent, options = {}) => {
 		child = null;
 
 		componentDidMount() {
-			this.child = document.createElement("div");
+			this.child = document.createElement('div');
 			document.body.appendChild(this.child);
 			this._renderLayer();
 		}
