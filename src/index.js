@@ -4,3 +4,4 @@ export ScrollView from './ScrollView/ScrollView';
 export OffCanvas from './OffCanvas/OffCanvas';
 // Utils
 export Dimensions from './Dimensions/Dimensions';
+export RenderInBody from './RenderInBody/RenderInBody';

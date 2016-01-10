@@ -56,6 +56,8 @@ const bindDimensions = (ComposedComponent, { getHeight = defaultGetHeight, getWi
 
 	return class extends Component {
 
+		static displayName = 'Dimensions';
+
 		state = {};
 
 		updateDimensions() {

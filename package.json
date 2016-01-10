@@ -22,14 +22,14 @@
   },
   "license": "MIT",
   "dependencies": {
-    "babel-cli": "^6.3.17",
+    "babel-cli": "^6.4.0",
     "babel-runtime": "^6.3.19",
     "core-decorators": "^0.9.2",
     "lodash": "^3.10.1",
-    "radium": "^0.16.1",
     "react-motion": "^0.3.1"
   },
   "peerDependencies": {
+    "radium": "^0.16.x",
     "react": "^0.14.x",
     "react-dom": "^0.14.x"
   },
@@ -42,7 +42,7 @@
     "babel-preset-stage-0": "^6.3.13",
     "eslint": "^1.10.3",
     "eslint-plugin-babel": "^3.0.0",
-    "eslint-plugin-react": "^3.13.1",
+    "eslint-plugin-react": "^3.14.0",
     "rimraf": "^2.5.0"
   }
 }
