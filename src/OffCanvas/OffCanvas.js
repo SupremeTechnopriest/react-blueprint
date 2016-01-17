@@ -83,24 +83,15 @@ export default class OffCanvas extends Component {
 
 		return (
 			<div style={styles.container}>
-							
-				<Motion defaultStyle={defaults} style={springs}>
-					{({ leftWidth, rightWidth, paddingLeft, paddingRight }) => {
-						return (
-							<div>
-								<div style={sidebarStyles(leftWidth)}>
-									{this.props.leftSidebar}
-								</div>
-								<div style={mainStyles(paddingLeft, paddingRight)}>
-									{this.props.children}
-								</div>
-								<div style={auxbarStyles(rightWidth)}>
-									{this.props.rightSidebar}
-								</div>
-							</div>
-						);
-					}}
-				</Motion>
+				<div style={sidebarStyles(this._calculateLeft('width'))}>
+					{this.props.leftSidebar}
+				</div>
+				<div style={auxbarStyles(this._calculateRight('width'))}>
+					{this.props.rightSidebar}
+				</div>
+				<div style={mainStyles(this._calculateLeft('padding'), this._calculateRight('padding'))}>
+					{this.props.children}
+				</div>
 			</div>
 		);
 
@@ -184,10 +175,11 @@ const styles = {
 		width: 0,
 		height: '100%',
 		position: 'fixed',
-		marginLeft: 0,
+		paddingLeft: 0,
 		float: 'left',
 		zIndex: 1,
-		overflow: 'hidden'
+		overflow: 'hidden',
+		transition: 'width 0.5s ease'
 	},
 	auxbar: {
 		width: 0,
@@ -196,15 +188,16 @@ const styles = {
 		right: 0,
 		float: 'left',
 		zIndex: 1,
-		overflow: 'hidden'
+		overflow: 'hidden',
+		transition: 'width 0.5s ease'
 	},
 	content: {
-		width: '100%',
+		width: 'auto',
 		height: '100%',
-		float: 'left',
 		paddingLeft: 0,
 		zIndex: 0,
 		overflowX: 'hidden',
-		position: 'relative'
+		position: 'relative',
+		transition: 'padding 0.5s ease'
 	}
 };
