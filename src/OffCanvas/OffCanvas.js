@@ -177,7 +177,7 @@ const styles = {
 		position: 'fixed',
 		paddingLeft: 0,
 		float: 'left',
-		zIndex: 1,
+		zIndex: 0,
 		overflow: 'hidden',
 		transition: 'width 0.5s ease'
 	},
@@ -187,7 +187,7 @@ const styles = {
 		position: 'fixed',
 		right: 0,
 		float: 'left',
-		zIndex: 1,
+		zIndex: 0,
 		overflow: 'hidden',
 		transition: 'width 0.5s ease'
 	},
@@ -195,7 +195,7 @@ const styles = {
 		width: 'auto',
 		height: '100%',
 		paddingLeft: 0,
-		zIndex: 0,
+		zIndex: 1,
 		overflowX: 'hidden',
 		position: 'relative',
 		transition: 'padding 0.5s ease'
