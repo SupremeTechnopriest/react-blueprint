@@ -45,7 +45,11 @@ export default class OffCanvas extends Component {
 		partial: true
 	};
 
-	state = {};
+	state = {
+		openRight: false,
+		openLeft: false,
+		expanded: false
+	};
 
 	constructor(props) {
 		super(props);
@@ -63,44 +67,31 @@ export default class OffCanvas extends Component {
 		let mainStyles = (paddingLeft, paddingRight) => [ styles.content, { paddingLeft, paddingRight }, style];
 		let auxbarStyles = width => [ styles.auxbar, { width }, rightStyle ];
 
+		let defaults = {
+			leftWidth: this._calculateLeft('width'),
+			rightWidth: this._calculateRight('width'),
+			paddingLeft: this._calculateLeft('padding'),
+			paddingRight: this._calculateRight('padding')
+		};
+
+		let springs = {
+			leftWidth: spring(this._calculateLeft('width')),
+			rightWidth: spring(this._calculateRight('width')),
+			paddingLeft: spring(this._calculateLeft('padding')),
+			paddingRight: spring(this._calculateRight('padding'))
+		};
+
 		return (
 			<div style={styles.container}>
-				
-				<Motion style={{ width: spring(this._calculateLeft('width')) }}>
-					{({ width }) => {
-						return (
-							<div style={sidebarStyles(width)}>
-								{this.props.leftSidebar}
-							</div>
-						);
-					}}
-				</Motion>
-				
-				<Motion 
-					style={{ 
-						paddingLeft: spring(this._calculateLeft('padding')),
-						paddingRight: spring(this._calculateRight('padding'))
-					}}>
-					{({ paddingLeft, paddingRight }) => {
-						return (
-							<div style={mainStyles(paddingLeft, paddingRight)}>
-								{this.props.children}
-							</div>
-						);
-					}}
-
-				</Motion>
-
-				<Motion style={{ width: spring(this._calculateRight('width')) }}>
-					{({ width }) => {
-						return (
-							<div style={auxbarStyles(width)}>
-								{this.props.rightSidebar}
-							</div>
-						)
-					}}
-				</Motion>
-
+				<div style={sidebarStyles(this._calculateLeft('width'))}>
+					{this.props.leftSidebar}
+				</div>
+				<div style={auxbarStyles(this._calculateRight('width'))}>
+					{this.props.rightSidebar}
+				</div>
+				<div style={mainStyles(this._calculateLeft('padding'), this._calculateRight('padding'))}>
+					{this.props.children}
+				</div>
 			</div>
 		);
 
@@ -184,10 +175,11 @@ const styles = {
 		width: 0,
 		height: '100%',
 		position: 'fixed',
-		marginLeft: 0,
+		paddingLeft: 0,
 		float: 'left',
-		zIndex: 1,
-		overflow: 'hidden'
+		zIndex: 0,
+		overflow: 'hidden',
+		transition: 'width 0.5s ease'
 	},
 	auxbar: {
 		width: 0,
@@ -195,16 +187,17 @@ const styles = {
 		position: 'fixed',
 		right: 0,
 		float: 'left',
-		zIndex: 1,
-		overflow: 'hidden'
+		zIndex: 0,
+		overflow: 'hidden',
+		transition: 'width 0.5s ease'
 	},
 	content: {
-		width: '100%',
+		width: 'auto',
 		height: '100%',
-		float: 'left',
 		paddingLeft: 0,
-		zIndex: 0,
+		zIndex: 1,
 		overflowX: 'hidden',
-		position: 'relative'
+		position: 'relative',
+		transition: 'padding 0.5s ease'
 	}
 };
