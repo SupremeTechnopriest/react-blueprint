@@ -3,8 +3,8 @@ import ReactDOM from 'react-dom';
 
 class RenderInBody extends Component {
 	
-		componentDidMount() {
-			this.child = document.createElement("div");
+		componentDidMount() {``
+			this.child = document.createElement('div');
 			document.body.appendChild(this.child);
 			this._renderLayer();
 		}
