@@ -49,6 +49,6 @@ if (__DEVELOPMENT__ && module.hot) {
 }
 
 store = store(rootReducer, getHydratedState());
-middleware.syncHistoryToStore(store, state => state.route);
+middleware(store, state => state.route);
 
 export default store;
