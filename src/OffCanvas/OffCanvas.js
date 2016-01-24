@@ -198,6 +198,7 @@ const styles = {
 		zIndex: 1,
 		overflowX: 'hidden',
 		position: 'relative',
+		pointerEvents: 'none',
 		transition: 'padding 0.5s ease'
 	}
 };
