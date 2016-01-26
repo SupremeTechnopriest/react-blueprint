@@ -2,7 +2,7 @@ const markdown = `
 
 ## Installation
 
-1. Install the command line interface - \`npm i -g react-blueprint\` 
+1. Install the command line interface - \`npm i -g react-blueprint-cli\` 
 2. Generate your project - \`react-blueprint init [app-name]\`
 3. Start your app - \`cd [app-name] && npm start\`
 
