@@ -179,8 +179,6 @@ export default class OffCanvas extends Component {
 			
 			return this.props.rightWidth * -1
 		}
-			
-
 	}
 
 	_calculateRight(type) {
@@ -189,13 +187,13 @@ export default class OffCanvas extends Component {
 				case 'squeeze':
 					if(this.state.expanded) return this.props.expandedWidth;
 					return this.props.rightWidth;
+				
 				case 'push':
 					if(this.state.expanded) return this.props.expandedWidth;
 					return this.props.rightWidth;
+
 				case 'overlay':
-					if(this.state.expanded) {
-						return type === 'padding' ? 0 : this.props.expandedWidth;
-					}
+					if(this.state.expanded) return type === 'padding' ? 0 : this.props.expandedWidth;
 					return type === 'padding' ? 0 : this.props.rightWidth;
 			}
 		} else {
