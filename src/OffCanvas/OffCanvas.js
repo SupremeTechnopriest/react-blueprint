@@ -1,6 +1,5 @@
 import React, { Component, PropTypes } from 'react';
 import Radium from 'radium';
-import { Motion, spring } from 'react-motion'; 
 
 @Radium
 export default class OffCanvas extends Component {
@@ -32,7 +31,7 @@ export default class OffCanvas extends Component {
 		border: PropTypes.bool,
 		leftStyle: PropTypes.object,
 		rightStyle: PropTypes.object,
-		style: PropTypes.object,
+		style: PropTypes.object
 	};
 
 	static defaultProps = {
@@ -59,38 +58,40 @@ export default class OffCanvas extends Component {
 	}
 
 	render() {
-
-		let {leftWidth, rightWidth, expandedWidth, partial, style, leftStyle, rightStyle } = this.props;
+		let {leftWidth, rightWidth, expandedWidth, partial, style, leftStyle, rightStyle, leftType, rightType } = this.props;
+		
 		let {openLeft, openRight, expanded } = this.state;
 
-		let sidebarStyles = width => [ styles.sidebar, { width }, leftStyle];
-		let mainStyles = (paddingLeft, paddingRight) => [ styles.content, { paddingLeft, paddingRight }, style];
-		let auxbarStyles = width => [ styles.auxbar, { width }, rightStyle ];
+		let leftPushStyles = [
+			leftType === 'push' && styles.push,
+			{ left: 0 }
+		];
 
-		let defaults = {
-			leftWidth: this._calculateLeft('width'),
-			rightWidth: this._calculateRight('width'),
-			paddingLeft: this._calculateLeft('padding'),
-			paddingRight: this._calculateRight('padding')
-		};
+		let rightPushStyles = [
+			rightType === 'push' && styles.push,
+			{ right: 0 }
+		];
 
-		let springs = {
-			leftWidth: spring(this._calculateLeft('width')),
-			rightWidth: spring(this._calculateRight('width')),
-			paddingLeft: spring(this._calculateLeft('padding')),
-			paddingRight: spring(this._calculateRight('padding'))
-		};
+		let containerStyles = marginLeft => [ styles.container, { marginLeft }],
+			sidebarStyles = width => [ styles.sidebar, { width }, leftType === 'overlay' && styles.overlay, leftPushStyles , leftStyle],
+			mainStyles = [ styles.content, style],
+			auxbarStyles = width => [ styles.auxbar, { width }, rightType === 'overlay' && styles.overlay, rightPushStyles , rightStyle ];
 
 		return (
-			<div style={styles.container}>
+			<div style={ containerStyles(this._calculatePush()) }>
+				{/* Main (Left) Sidebar */}
 				<div style={sidebarStyles(this._calculateLeft('width'))}>
 					{this.props.leftSidebar}
 				</div>
+
+				{/* Content */}
+				<div style={mainStyles}>
+					{this.props.children}
+				</div>
+
+				{/* Aux (Right) Sidebar */}
 				<div style={auxbarStyles(this._calculateRight('width'))}>
 					{this.props.rightSidebar}
-				</div>
-				<div style={mainStyles(this._calculateLeft('padding'), this._calculateRight('padding'))}>
-					{this.props.children}
 				</div>
 			</div>
 		);
@@ -98,20 +99,45 @@ export default class OffCanvas extends Component {
 	}
 
 	toggleLeft() {
-		this.setState({ openLeft: !this.state.openLeft });
+		let { leftType, rightType } = this.props;
+
+		if ( leftType === 'push' && rightType === 'push' ) {
+			this.setState({ openLeft: !this.state.openLeft, openRight: false });
+		} else {
+			this.setState({ openLeft: !this.state.openLeft });
+		}
+
 	}
 
 	toggleRight() {
+		let { leftType, rightType } = this.props;
+		
+		if ( leftType === 'push' && rightType === 'push' ){
 
-		if(this.state.openRight) {
-			this.setState({
-				openRight: false,
-				expanded: false
-			});
+			if(this.state.openRight) {
+				this.setState({
+					openRight: false,
+					expanded: false
+				});
+			} else {
+				this.setState({
+					openRight: true,
+					openLeft: false
+				});
+			}
+
 		} else {
-			this.setState({
-				openRight: true,
-			});
+
+			if(this.state.openRight) {
+				this.setState({
+					openRight: false,
+					expanded: false
+				});
+			} else {
+				this.setState({
+					openRight: true
+				});
+			}
 		}
 	}
 
@@ -136,10 +162,34 @@ export default class OffCanvas extends Component {
 		this.setState({ openRight: false });
 	}
 
+	_calculatePush() {
+		let { rightType, leftType } = this.props;
+
+		let {openLeft, openRight, expanded } = this.state;
+		
+		if (openLeft && leftType === 'push') {
+		
+			return this.props.leftWidth
+		
+		} else if (openRight  && rightType === 'push') {
+		
+			if(this.state.expanded) {
+				return this.props.expandedWidth * -1;
+			}
+			
+			return this.props.rightWidth * -1
+		}
+			
+
+	}
+
 	_calculateRight(type) {
 		if(this.state.openRight) {
 			switch(this.props.rightType) {
 				case 'squeeze':
+					if(this.state.expanded) return this.props.expandedWidth;
+					return this.props.rightWidth;
+				case 'push':
 					if(this.state.expanded) return this.props.expandedWidth;
 					return this.props.rightWidth;
 				case 'overlay':
@@ -158,6 +208,8 @@ export default class OffCanvas extends Component {
 			switch(this.props.leftType) {
 				case 'squeeze':
 					return this.props.leftWidth;
+				case 'push':
+					return this.props.leftWidth;
 				case 'overlay':
 					return type === 'padding' ? 0 : this.props.leftWidth;
 			}
@@ -170,35 +222,46 @@ export default class OffCanvas extends Component {
 }
 
 const styles = {
-	container: { height: '100%' },
+	container: {
+		height: '100%',
+		width: '100%',
+		display: 'flex',
+		flexDirection: 'row',
+		flex: 1,
+		transition: 'margin 0.4s ease-out'
+	},
 	sidebar: {
 		width: 0,
 		height: '100%',
-		position: 'fixed',
+		position:'relative', 
 		paddingLeft: 0,
-		float: 'left',
 		zIndex: 0,
 		overflow: 'hidden',
-		transition: 'width 0.5s ease'
+		transition: 'width 0.4s ease-out'
 	},
 	auxbar: {
 		width: 0,
+		position:'relative', 
 		height: '100%',
-		position: 'fixed',
 		right: 0,
-		float: 'left',
 		zIndex: 0,
 		overflow: 'hidden',
-		transition: 'width 0.5s ease'
+		transition: 'width 0.4s ease-out'
+	},
+	overlay: {
+		position: 'absolute',
+		zIndex: 2,
+	},
+	push: {
+		position: 'absolute'
 	},
 	content: {
 		width: 'auto',
 		height: '100%',
 		paddingLeft: 0,
 		zIndex: 1,
-		overflowX: 'hidden',
+		flex: 1,
 		position: 'relative',
-		pointerEvents: 'none',
-		transition: 'padding 0.5s ease'
+		pointerEvents: 'none'
 	}
 };
