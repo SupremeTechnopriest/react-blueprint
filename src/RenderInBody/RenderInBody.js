@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
+import { render, unmountComponentAtNode } from 'react-dom';
 
 class RenderInBody extends Component {
 	
@@ -14,13 +14,13 @@ class RenderInBody extends Component {
 		}
 
 		componentWillUnmount() {
-			React.unmountComponentAtNode(this.child);
+			unmountComponentAtNode(this.child);
 			document.body.removeChild(this.child);
 		}
 
 
 		_renderLayer() {
-			ReactDOM.render(this.props.children, this.child);
+			render(this.props.children, this.child);
 		}
 
 		render() {
@@ -48,12 +48,12 @@ const decorateRenderInBody = (ComposedComponent, options = {}) => {
 		}
 
 		componentWillUnmount() {
-			ReactDOM.unmountComponentAtNode(this.child);
+			unmountComponentAtNode(this.child);
 			document.body.removeChild(this.child);
 		}
 
 		_renderLayer() {
-			ReactDOM.render(<ComposedComponent />, this.child);
+			render(<ComposedComponent />, this.child);
 		}
 
 		render() {
