@@ -37,7 +37,8 @@ export default class View extends Component {
 		if (this.props.auto) dynamicStyles.flex = '1 0 0';
 
 		let passedProps = {
-			onClick: this.props.onClick ? this.props.onClick : () => {}
+			onClick: this.props.onClick ? this.props.onClick : () => {},
+			className: this.props.className || ''
 		};
 
 		let style;

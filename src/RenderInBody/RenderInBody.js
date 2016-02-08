@@ -3,7 +3,7 @@ import { render, unmountComponentAtNode } from 'react-dom';
 
 class RenderInBody extends Component {
 	
-		componentDidMount() {``
+		componentDidMount() {
 			this.child = document.createElement('div');
 			document.body.appendChild(this.child);
 			this._renderLayer();
