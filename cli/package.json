@@ -23,7 +23,7 @@
   "dependencies": {
     "chalk": "^1.1.1",
     "commander": "^2.9.0",
-    "prompt": "^0.2.14",
+    "prompt": "^1.0.0",
     "semver": "^5.1.0",
     "yeoman-environment": "^1.4.0",
     "yeoman-generator": "^0.22.2"
