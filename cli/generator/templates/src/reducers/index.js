@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import { routeReducer as route }  from 'redux-simple-router';
+import { routerReducer as route }  from 'react-router-redux';
 import ui from './UIReducer';
 
 export default combineReducers({

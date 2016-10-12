@@ -7,13 +7,13 @@ import thunk from 'redux-thunk';
 import { DevTools } from 'components';
 import createLogger from 'redux-logger';
 
-import { syncHistory } from 'redux-simple-router';
-import { browserHistory as history } from 'react-router';
+import { routerMiddleware } from 'react-router-redux';
+import { browserHistory } from 'react-router';
 
 import rootReducer from 'reducers';
 import { getHydratedState } from 'utils/localStorage';
 
-let middleware = syncHistory(history);
+const middleware = routerMiddleware(browserHistory);
 
 // Production Store
 const createProductionStore = () => {

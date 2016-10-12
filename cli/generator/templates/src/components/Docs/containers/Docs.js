@@ -14,7 +14,6 @@ import { View, ScrollView, Dimensions } from 'react-blueprint';
 import { authenticated$ } from 'selectors/UISelectors';
 import { path$ } from 'selectors/RouteSelectors';
 
-import { pushPath } from 'redux-simple-router';
 import { updateAuthenticated } from 'actions/UIActions';
 
 import { colors, type } from 'utils/style';
