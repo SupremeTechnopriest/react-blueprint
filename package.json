@@ -1,6 +1,6 @@
 {
   "name": "react-blueprint",
-  "version": "1.1.9",
+  "version": "1.1.10",
   "description": "React.js Redux Boilerplate",
   "main": "index.js",
   "scripts": {
