@@ -12,8 +12,6 @@ React Blueprint is a react-native insipred web app generator and tool set.
 
 It uses the [best libraries](https://github.com/rackt) for React development without being too opinionated.  We make no assumptions on how your app should look, but instead provide a strong architecture to build upon.
 
-> :exclamation: This project is in early stages of development. I will strive to keep the api consistent, but it may be subject to change.
-
 ### Included Libraries
 
 - [**react**](https://facebook.github.io/react/)
@@ -21,7 +19,7 @@ It uses the [best libraries](https://github.com/rackt) for React development wit
 - [**react-redux**](https://github.com/rackt/react-redux)
 - [**redux**](https://github.com/rackt/react-router)
 - [**redux-thunk**](https://github.com/gaearon/redux-thunkre)
-- [**redux-simple-router**](https://github.com/rackt/redux-simple-router)
+- [**react-router-redux**](https://github.com/rackt/react-router-redux)
 - [**reselect**](https://github.com/rackt/reselect)
 - [**radium**](http://stack.formidable.com/radium/)
 - [**babel**](https://babeljs.io/)
