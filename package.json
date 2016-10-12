@@ -7,7 +7,7 @@
     "pkg": "npm run package && npm run package-cli",
     "package": "npm rebuild && npm run clean && npm run build && npm version patch && npm publish --tag latest",
     "package-cli": "cd cli && npm rebuild && npm version patch && npm publish --tag latest",
-    "build": "babel src --out-dir lib",
+    "build": "babel src -d lib",
     "clean": "rimraf lib",
     "lint": "eslint -c .eslintrc src",
     "test": "karma start"
